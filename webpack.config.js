@@ -4,6 +4,12 @@ module.exports = {
 	entry: './src/ts/index.ts',
 	module: {
 		rules: [
+			{	
+				enforce: 'pre',
+				loader: 'eslint-loader',
+				test: /\.(js|ts)$/,
+				exclude: /node_modules/
+			},
 			{
 				loader: 'ts-loader',
 				test: /\.ts?$/,
