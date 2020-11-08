@@ -2,7 +2,8 @@
 	"compilerOptions": {
 		"target": "es5",
 		"module": "es2015",
-		"lib": ["dom", "ES2015"],
+		"jsx": "react",
+		"lib": ["dom", "ES2020"],
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,

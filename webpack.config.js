@@ -1,18 +1,18 @@
 const path = require('path');
 
 module.exports = {
-	entry: './src/ts/index.ts',
+	entry: './src/ts/index.tsx',
 	module: {
 		rules: [
 			{	
 				enforce: 'pre',
 				loader: 'eslint-loader',
-				test: /\.(js|ts)$/,
+				test: /\.(js|ts|tsx)$/,
 				exclude: /node_modules/
 			},
 			{
 				loader: 'ts-loader',
-				test: /\.ts?$/,
+				test: /\.tsx?$/,
 				exclude: /node_modules/,
 				options: {
 					configFile: 'tsconfig.json'
@@ -25,6 +25,6 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist/assets/js/')
 	},
 	resolve: {
-		extensions: ['.ts', '.js', '.tsx']
+		extensions: ['.ts', '.tsx', '.js', '.tsx']
 	}
 }
