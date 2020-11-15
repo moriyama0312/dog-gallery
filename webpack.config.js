@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
-	entry: './src/ts/index.tsx',
+	entry: './src/tsx/index.tsx',
 	module: {
 		rules: [
-			{	
+			{
 				enforce: 'pre',
 				loader: 'eslint-loader',
 				test: /\.(js|ts|tsx)$/,
@@ -17,6 +17,19 @@ module.exports = {
 				options: {
 					configFile: 'tsconfig.json'
 				}
+			},
+			{
+				test: /\.scss?$/,
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true
+						}
+					},
+					'sass-loader'
+				]
 			}
 		]
 	},
@@ -25,6 +38,6 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist/assets/js/')
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.tsx']
+		extensions: ['.ts', '.tsx', '.js', 'scss', 'css']
 	}
 }

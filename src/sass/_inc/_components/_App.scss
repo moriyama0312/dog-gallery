@@ -1,0 +1,24 @@
+@charset 'utf-8';
+@import '../_core/_reset.scss';
+
+.container {
+	width: 100%;
+	max-width: 360px;
+	margin: 0 auto;
+	.header {
+		text-align: center;
+	}
+	.contents {
+		.number {
+			text-align: center;
+			padding: 20px 0;
+			font-size: 24px;
+		}
+		.btn {
+			cursor: pointer;
+			padding: 20px 0;
+			text-align: center;
+			background: red;
+		}
+	}
+}

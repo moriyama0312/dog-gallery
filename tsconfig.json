@@ -3,11 +3,16 @@
 		"target": "es5",
 		"module": "es2015",
 		"jsx": "react",
-		"lib": ["dom", "ES2020"],
+		"lib": ["dom", "esnext"],
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"allowJs": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
 	}
 }
