@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './containers/App';
 
-ReactDOM.render(<App timeLeft={60} reset={() => console.log('hoge')} />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
