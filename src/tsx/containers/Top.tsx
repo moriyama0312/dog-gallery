@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import AppComponent from '../components/App';
+import AppComponent from '../components/Top';
 
 const useTimer = (limitSec: number): [number, () => void] => {
 	const [timeLeft, setTimeLeft] = useState(limitSec);
