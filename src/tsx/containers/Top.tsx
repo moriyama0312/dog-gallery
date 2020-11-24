@@ -1,30 +1,23 @@
-import React, { FC, useEffect, useState } from 'react';
-import AppComponent from '../components/Top';
+import React, { FC } from 'react';
+import TopComponent, {Task} from '../components/Top';
 
-const useTimer = (limitSec: number): [number, () => void] => {
-	const [timeLeft, setTimeLeft] = useState(limitSec);
+const TopContainer: FC = () => {
+	const TaskList: Task[] = [
+		{
+			id: 1,
+			title: 'Test Task',
+			detail: 'Test用のタスクです',
+			status: 'not-started',
+		},
+		{
+			id: 2,
+			title: 'Test Task2',
+			detail: 'Test用のタスク2です',
+			status: 'working',
+		}
+	];
 
-	const reset = () => {
-		setTimeLeft(limitSec);
-	};
-
-	useEffect(() => {
-		const tick = () => {
-			setTimeLeft(prevTime => (prevTime === 0 ? limitSec : prevTime - 1));
-		};
-		const timerId = setInterval(tick, 1000);
-
-		return () => clearInterval(timerId);
-	}, [limitSec]);
-
-	return [timeLeft, reset];
+	return <TopComponent {...TaskList} />;
 };
 
-const AppContainer: FC = () => {
-	const LIMIT = 60;
-	const [timeLeft, reset] = useTimer(LIMIT);
-
-	return <AppComponent timeLeft={timeLeft} reset={reset} />;
-};
-
-export default AppContainer;
+export default TopContainer;

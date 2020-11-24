@@ -1,0 +1,12 @@
+@charset 'utf-8';
+@import '../../_core/_reset.scss';
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	.inner {
+		padding: 15px 20px;
+	}
+}

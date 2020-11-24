@@ -42,6 +42,7 @@
 		"prefer-arrow-callback": "error",
 		"prefer-const": "error",
 		"prefer-spread": "error",
-		"require-yield": "error"
+		"require-yield": "error",
+		"react/prop-types": "off"
 	}
 }
