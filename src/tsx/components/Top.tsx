@@ -13,11 +13,13 @@ export interface Task {
 	status: 'not-started' | 'working' | 'complete';
 	deadline?: Date;
 }
-type TopProps = Task[]
+// type TopProps = Task[];
+interface TopProps {
+	TaskList: Task[];
+}
 
 
-const TopComponent: FC<TopProps> = ({...TaskList}) => {
-	console.log(TaskList);
+const TopComponent: FC<TopProps> = ({TaskList}) => {
 	const StatusList: Status[] = [
 		{
 			id: 'not-started',

@@ -17,7 +17,7 @@ const TopContainer: FC = () => {
 		}
 	];
 
-	return <TopComponent {...TaskList} />;
+	return <TopComponent TaskList={TaskList} />;
 };
 
 export default TopContainer;

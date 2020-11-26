@@ -1,0 +1,19 @@
+@charset 'utf-8';
+@import '../_core/_reset.scss';
+
+.container {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	padding: 60px 0 90px;
+	.task {
+		width: 80vw;
+		height: 100%;
+		&__title {
+			margin: 30px 0 15px;
+		}
+		&__text {
+			font-size: 14px;
+		}
+	}
+}
