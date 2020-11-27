@@ -41,6 +41,12 @@ const TasksComponent: FC<TasksProps> = ({ match }) => {
 			label: '完了'
 		}
 	];
+	const TimestampToDate = ():string => {
+		const TIMESTAMP = Task.created_day;
+		const DateObj = new Date(TIMESTAMP);
+		const {y, m, d} = {y: DateObj.getFullYear(), m: DateObj.getMonth()+1, d: DateObj.getDate()};
+		return `${y}年${m}月${d}日`;
+	};
 
 	return (
 		<div className={Styles.container}>
@@ -54,7 +60,7 @@ const TasksComponent: FC<TasksProps> = ({ match }) => {
 				<h3 className={Styles.task__title}>カテゴリー</h3>
 				<p className={Styles.task__text}>{Task.category}</p>
 				<h3 className={Styles.task__title}>タスクの作成日</h3>
-				{/* <p className={Styles.task__text}>{new Date(Task.created_day)}</p> */}
+				<p className={Styles.task__text}>{TimestampToDate()}</p>
 			</div>
 		</div>
 	);
