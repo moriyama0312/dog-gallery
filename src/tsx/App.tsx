@@ -11,7 +11,7 @@ const App: FC = () => (
 		<Header />
 		<div className={Styles.inner}>
 			<Switch>
-				<Route path="/" component={Top} />
+				<Route exact path="/" component={Top} />
 				<Route path="/tasks/:id" component={Tasks} />
 				<Redirect to="/" />
 			</Switch>

@@ -54,7 +54,7 @@ const TasksComponent: FC<TasksProps> = ({ match }) => {
 				<h3 className={Styles.task__title}>カテゴリー</h3>
 				<p className={Styles.task__text}>{Task.category}</p>
 				<h3 className={Styles.task__title}>タスクの作成日</h3>
-				<p className={Styles.task__text}>{new Date(Task.created_day)}</p>
+				{/* <p className={Styles.task__text}>{new Date(Task.created_day)}</p> */}
 			</div>
 		</div>
 	);
