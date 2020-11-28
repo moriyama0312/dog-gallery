@@ -15,7 +15,7 @@ interface Task {
 	created_day: number;
 	deadline?: Date;
 }
-type TasksProps = {} & RouteComponentProps<{ id: string }>;
+type TasksProps = RouteComponentProps<{ id: string }>;
 
 const TasksComponent: FC<TasksProps> = ({ match }) => {
 	const id = match.params.id;
@@ -45,6 +45,7 @@ const TasksComponent: FC<TasksProps> = ({ match }) => {
 		const TIMESTAMP = Task.created_day;
 		const DateObj = new Date(TIMESTAMP);
 		const {y, m, d} = {y: DateObj.getFullYear(), m: DateObj.getMonth()+1, d: DateObj.getDate()};
+
 		return `${y}年${m}月${d}日`;
 	};
 
