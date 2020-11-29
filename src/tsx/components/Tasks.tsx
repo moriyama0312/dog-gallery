@@ -6,7 +6,7 @@ interface Status {
 	id: string;
 	label: string;
 }
-interface Task {
+export interface Task {
 	id: number;
 	title: string;
 	detail: string;
@@ -15,18 +15,11 @@ interface Task {
 	created_day: number;
 	deadline?: Date;
 }
-type TasksProps = RouteComponentProps<{ id: string }>;
 
-const TasksComponent: FC<TasksProps> = ({ match }) => {
+type TasksProps = {Task: Task} & RouteComponentProps<{ id: string }>;
+
+const TasksComponent: FC<TasksProps> = ({ Task, match }) => {
 	const id = match.params.id;
-	const Task: Task = {
-		id: 1,
-		title: 'Test Task',
-		detail: 'Test用のタスクです',
-		status: 'not-started',
-		category: '趣味',
-		created_day: Date.now()
-	};
 	const StatusList: Status[] = [
 		{
 			id: 'not-started',
