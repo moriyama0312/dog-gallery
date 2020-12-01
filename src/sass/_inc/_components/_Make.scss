@@ -14,6 +14,61 @@
 			&__title {
 				margin: 30px 0 15px;
 			}
+			input {
+				padding: 5px;
+				border: 1px solid #676767;
+				border-radius: 5px;
+				outline: none;
+				width: 500px;
+			}
+			textarea {
+				padding: 5px;
+				border: 1px solid #676767;
+				border-radius: 5px;
+				outline: none;
+				width: 500px;
+				height: 200px;
+			}
+			.checkbox__list {
+				list-style: none;
+				display: flex;
+				justify-content: flex-start;
+				li {
+					input {
+						width: auto;
+						margin-right: 3px;
+					}
+					margin-right: 10px;
+				}
+			}
+			.deadline__list {
+				list-style: none;
+				display: flex;
+				justify-content: flex-start;
+				li {
+					input {
+						width: 70px;
+						text-align: center;
+						margin-right: 5px;
+					}
+					margin-right: 15px;
+				}
+			}
+		}
+		&__submit {
+			width: 100px;
+			margin: 30px auto 0;
+			border: 1px solid #676767;
+			border-radius: 5px;
+			&__btn {
+				padding: 10px 0;
+				cursor: pointer;
+				text-align: center;
+				&:hover {
+					background: #000000;
+					color: #ffffff;
+				}
+			}
 		}
 	}
 }
