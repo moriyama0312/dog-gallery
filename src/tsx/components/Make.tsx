@@ -1,11 +1,17 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent } from 'react';
 import Styles from '../../sass/_inc/_components/_Make.scss';
 
-const MakeComponent: FC = () => {
+interface MakeProps {
+	SubmitFunc: (e: FormEvent) => void;
+}
+
+const MakeComponent: FC<MakeProps> = ({ SubmitFunc }) => {
 	return (
 		<div className={Styles.container}>
 			<div className={Styles.form}>
-				<form>
+				<form
+					onSubmit={SubmitFunc}
+				>
 					<div className={Styles.form__block}>
 						<h3 className={Styles.form__block__title}>タスクのタイトル</h3>
 						<input placeholder="タスクタイトルを入力してください"></input>
@@ -41,9 +47,9 @@ const MakeComponent: FC = () => {
 						</ul>
 					</div>
 					<div className={Styles.form__submit}>
-						<div className={Styles.form__submit__btn}>
+						<button type="submit" className={Styles.form__submit__btn}>
 							登録する
-						</div>
+						</button>
 					</div>
 				</form>
 			</div>
