@@ -14,11 +14,11 @@ const MakeComponent: FC<MakeProps> = ({ SubmitFunc }) => {
 				>
 					<div className={Styles.form__block}>
 						<h3 className={Styles.form__block__title}>タスクのタイトル</h3>
-						<input placeholder="タスクタイトルを入力してください"></input>
+						<input name="task_title" placeholder="タスクタイトルを入力してください"></input>
 					</div>
 					<div className={Styles.form__block}>
 						<h3 className={Styles.form__block__title}>タスクの詳細</h3>
-						<textarea placeholder="タスクの詳細を入力してください"></textarea>
+						<textarea name="task_detail" placeholder="タスクの詳細を入力してください"></textarea>
 					</div>
 					<div className={Styles.form__block}>
 						<h3 className={Styles.form__block__title}>タスクのカテゴリー</h3>

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import Top from './containers/Top';
 import Tasks from './containers/Tasks';
-import Make from './components/Make';
+import Make from './containers/Make';
 import Header from './modules/molecules/Header';
 import Styles from '../sass/_inc/_App.scss';
 
