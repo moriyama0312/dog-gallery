@@ -2,8 +2,10 @@ const path = require('path');
 
 module.exports = {
 	devServer: {
-		publicPath: path.relative(__dirname, 'assets/js/'),
-		contentBase: path.resolve(__dirname, 'dist/'),
+		publicPath: path.relative(__dirname, 'assets/js'),
+		contentBase: path.resolve(__dirname, 'dist'),
+		contentBasePublicPath: '/',
+		index: 'index.html',
 		watchContentBase: true,
 		hot: true,
 		inline: true,

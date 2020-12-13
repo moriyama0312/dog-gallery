@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all -p start:server watch:build",
+    "start": "npm-run-all -p start:server start:front",
     "start:server": "ts-node ./srv/index.ts",
-	"watch:build": "webpack serve",
+    "start:front": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
     "watch": "webpack --mode=development --watch"
@@ -27,9 +27,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "ts-loader": "^8.0.6",
-    "typescript": "^4.0.3",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^4.1.0"
+    "typescript": "^4.0.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
@@ -54,6 +52,8 @@
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "ts-node": "^9.1.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
   }
 }
