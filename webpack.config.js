@@ -1,6 +1,15 @@
 const path = require('path');
 
 module.exports = {
+	devServer: {
+		publicPath: path.relative(__dirname, 'assets/js/'),
+		contentBase: path.resolve(__dirname, 'dist/'),
+		watchContentBase: true,
+		hot: true,
+		inline: true,
+		port: 3000,
+		open: true
+	},
 	entry: './src/tsx/index.tsx',
 	module: {
 		rules: [
@@ -35,7 +44,8 @@ module.exports = {
 	},
 	output: {
 		filename: 'main.bundle.js',
-		path: path.resolve(__dirname, 'dist/assets/js/')
+		path: path.resolve(__dirname, 'dist/assets/js/'),
+		publicPath: '/js/'
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', 'scss', 'css']

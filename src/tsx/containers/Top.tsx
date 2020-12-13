@@ -17,6 +17,8 @@ const TopContainer: FC = () => {
 		}
 	];
 
+	console.log('hoge');
+
 	return <TopComponent TaskList={TaskList} />;
 };
 
