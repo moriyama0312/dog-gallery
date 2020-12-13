@@ -9,7 +9,14 @@ module.exports = {
 		hot: true,
 		inline: true,
 		port: 3000,
-		open: true
+		open: true,
+		proxy: {
+			'/api/**': {
+				target: 'http//localhost:3001',
+				secure: false,
+				logLevel: 'debug'
+			}
+		}
 	},
 	entry: './src/tsx/index.tsx',
 	module: {
