@@ -17,8 +17,6 @@ const TopContainer: FC = () => {
 		}
 	];
 
-	console.log('hogehogehogehoge');
-
 	return <TopComponent TaskList={TaskList} />;
 };
 
