@@ -1,4 +1,4 @@
-INSERT INTO tasks_tbl VALUES(1, 'テストタスクです', 'テスト用に投稿されたタスクです', 1, 1, UNIX_TIMESTAMP(now()));
+INSERT INTO tasks_tbl VALUES(1, 'テストタスクです', 'テスト用に投稿されたタスクです', 1, 1, UNIX_TIMESTAMP(), NULL);
 
 INSERT INTO statuses_tbl VALUES(1, '未着手');
 INSERT INTO statuses_tbl VALUES(2, '作業中');
