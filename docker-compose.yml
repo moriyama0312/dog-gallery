@@ -1,5 +1,15 @@
 version: '3'
 services:
+  web-server:
+    image: node:10.14
+    container_name: node_web_server
+    tty: true
+    volumes:
+      - './srv:/srv/'
+    depends_on:
+      - mysql-server
+    links:
+      - mysql-server
   mysql-server:
     image: mysql:5.7
     container_name: mysql_server
