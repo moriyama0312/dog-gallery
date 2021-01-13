@@ -1,10 +1,33 @@
 const getTasks = require('./api/get');
+const { Client } = require('pg');
 let express = require('express');
 let app = express();
 console.log('hoge');
 // console.log(getFunc);
 
 // DBへの接続
+interface DbSetting {
+	connectionString: string;
+	ssl: boolean;
+}
+const DbSetting: DbSetting = {
+	connectionString: process.env.DATABASE_URL || 'postgres://ltekopzxfbigxk:8a231cb186de5400a491174de781f37bc1d0373c111dcca1acd4d305fc8cc741@ec2-54-156-73-147.compute-1.amazonaws.com:5432/d8vf9g7eb00i29',
+	ssl: true
+};
+
+const client = new Client(DbSetting);
+
+client.connect();
+
+const testQuery: string = 'SELECT * FROM tasks_tbl;';
+client.query(testQuery, (err, res) => {
+	if(err) {
+		console.log(err);
+	}else {
+		console.log(res);
+	}
+	client.end();
+});
 
 // app.get('/', () => {
 // 	console.log('hoge');
