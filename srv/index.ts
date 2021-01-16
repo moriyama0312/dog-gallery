@@ -8,19 +8,20 @@ console.log('hoge');
 // DBへの接続
 interface DbSetting {
 	connectionString: string;
-	ssl: boolean;
+	ssl: { rejectUnauthorized: boolean };
 }
 const DbSetting: DbSetting = {
 	connectionString: process.env.DATABASE_URL || 'postgres://ltekopzxfbigxk:8a231cb186de5400a491174de781f37bc1d0373c111dcca1acd4d305fc8cc741@ec2-54-156-73-147.compute-1.amazonaws.com:5432/d8vf9g7eb00i29',
-	ssl: true
+	ssl: { rejectUnauthorized: false }
 };
+console.log(process.env.DATABASE_URL);
 
 const client = new Client(DbSetting);
 
 client.connect();
-
+console.log('connect');
 const testQuery: string = 'SELECT * FROM tasks_tbl;';
-client.query(testQuery, (err, res) => {
+client.query(testQuery, (err:any, res:any) => {
 	if(err) {
 		console.log(err);
 	}else {
