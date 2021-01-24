@@ -1,5 +1,5 @@
 interface Payload {
-	[key: string]: string | number;
+	[key: string]: string | number | Date;
 }
 
 const querySwitch = (type: string, payload?: Payload) => {
@@ -27,6 +27,29 @@ const querySwitch = (type: string, payload?: Payload) => {
 			break;
 		case 'GET_ICONS':
 			query = 'SELECT * FROM icons_tbl;';
+			break;
+		case 'POST_TASKS':
+			if(payload) {
+				if(payload.deadline) {
+					// deadlineのDate型を変換するか考える
+					query = 'INSERT INTO tasks_tbl (task_title, task_detail, task_status, task_category, task_createdby, task_charged, task_deadline) VALUES ($1, $2, $3, $4, $5, $6, $7);';
+				}else {
+					query = 'INSERT INTO tasks_tbl (task_title, task_detail, task_status, task_category, task_createdby, task_charged) VALUES ($1, $2, $3, $4, $5, $6);';
+				}
+			}
+			break;
+		case 'POST_PROFILES':
+			if(payload) {
+				if(payload.intro && payload.icon) {
+					query = 'INSERT INTO profiles_tbl (profile_id, profile_name, profile_intro, profile_icon) VALUES ($1, $2, $3, $4);';
+				}else if(payload.intro) {
+					query = 'INSERT INTO profiles_tbl (profile_id, profile_name, profile_intro) VALUES ($1, $2, $3);';
+				}else if(payload.icon) {
+					query = 'INSERT INTO profiles_tbl (profile_id, profile_name, profile_icon) VALUES ($1, $2, $3);';
+				}else {
+					query = 'INSERT INTO profiles_tbl (profile_id, profile_name) VALUES ($1, $2);';
+				}
+			}
 			break;
 		default:
 			query = '';
