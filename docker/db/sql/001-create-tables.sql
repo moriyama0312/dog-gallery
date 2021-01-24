@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS tasks_tbl (
 	task_status INT NOT NULL REFERENCES statuses_tbl (status_id),
 	task_category INT NOT NULL REFERENCES categories_tbl (category_id),
 	task_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	task_createdby TEXT NOT NULL REFERENCES users_tbl (user_name),
-	task_charged TEXT NOT NULL REFERENCES users_tbl (user_name),
+	task_createdby TEXT NOT NULL REFERENCES profiles_tbl (profile_id),
+	task_charged TEXT NOT NULL REFERENCES profiles_tbl (profile_id),
 	task_deadline TIMESTAMP DEFAULT NULL
 );
