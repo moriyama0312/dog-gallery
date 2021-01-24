@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"outDir": "dist/assets/js",
 		"target": "es5",
 		"module": "es2015",
 		"jsx": "react",
@@ -14,5 +15,6 @@
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
+		"strictPropertyInitialization": false
 	}
 }
