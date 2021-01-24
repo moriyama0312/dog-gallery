@@ -2,8 +2,13 @@ const { Pool } = require('pg');
 const { queryCreator } = require('./query.ts');
 
 // Payload関連
-interface GetPosts {
+interface GetTasks {
 	id?: number,
+	user?: string,
+	status?: number,
+	range?: number
+}
+interface GetProfiles {
 	user?: string
 }
 
@@ -38,10 +43,19 @@ class Postgres {
 			return err;
 		}
 	}
-	async getPosts(type: string, payload?: GetPosts) {
+	async getTasks(type: string, payload?: GetTasks) {
 		const query = queryCreator(type, payload);
 		const params = (payload) ? Object.keys(payload).map(item => item) : [];
 		return await this.query(query, params);
+	}
+	async getProfiles(type: string, payload?: GetProfiles) {
+		const query = queryCreator(type, payload);
+		const params = (payload) ? Object.keys(payload).map(item => item) : [];
+		return await this.query(query, params);
+	}
+	async getIcons(type: string) {
+		const query = queryCreator(type);
+		return await this.query(query);
 	}
 }
 

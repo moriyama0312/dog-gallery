@@ -7,7 +7,7 @@ let app = express();
 const initializePostgres = async () => {
 	const postgres = new PostgresClass();
 	await postgres.init();
-	const result = await postgres.getPosts('GET_TASKS');
+	const result = await postgres.getTasks('GET_TASKS');
 
 	console.log(result);
 }
