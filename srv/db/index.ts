@@ -28,6 +28,26 @@ interface PostProfiles {
 	intro?: string,
 	icon?: number
 }
+// Put
+interface PutTasks {
+	id: number,
+	title?: string,
+	detail?: string,
+	status?: number,
+	category?: number,
+	charged?: string,
+	deadline?: Date
+}
+interface PutProfiles {
+	id: string,
+	name?: string,
+	intro?: string,
+	icon?: number
+}
+// Delete
+interface DeleteTasks {
+	id: number
+}
 
 // DBへの接続
 interface DbSetting {
@@ -76,12 +96,27 @@ class Postgres {
 	}
 	async postTasks(type: string, payload: PostTasks) {
 		const query = queryCreator(type, payload);
-		const params = (payload) ? Object.keys(payload).map(item => item) : [];
+		const params = Object.keys(payload).map(item => item);
 		return await this.query(query, params);
 	}
 	async postProfiles(type: string, payload: PostTasks) {
 		const query = queryCreator(type, payload);
-		const params = (payload) ? Object.keys(payload).map(item => item) : [];
+		const params = Object.keys(payload).map(item => item);
+		return await this.query(query, params);
+	}
+	async putTasks(type: string, payload: PutTasks) {
+		const query = queryCreator(type, payload);
+		const params = Object.keys(payload).map(item => item);
+		return await this.query(query, params);
+	}
+	async putProfiles(type: string, payload: PutProfiles) {
+		const query = queryCreator(type, payload);
+		const params = Object.keys(payload).map(item => item);
+		return await this.query(query, params);
+	}
+	async deleteTasks(type: string, payload: DeleteTasks) {
+		const query = queryCreator(type, payload);
+		const params = Object.keys(payload).map(item => item);
 		return await this.query(query, params);
 	}
 }

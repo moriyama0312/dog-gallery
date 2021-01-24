@@ -51,6 +51,19 @@ const querySwitch = (type: string, payload?: Payload) => {
 				}
 			}
 			break;
+		case 'PUT_TASKS':
+			if(payload) {
+				// パターンが多いのでどうするか考える
+			}
+			break;
+		case 'PUT_PROFILES':
+			if(payload) {
+				// パターンが多いのでどうするか考える
+			}
+			break;
+		case 'DELETE_TASKS':
+			query = 'DELETE FROM tasks_tbl WHERE id = $1';
+			break;
 		default:
 			query = '';
 			break;
