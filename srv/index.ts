@@ -4,9 +4,10 @@ const { Client } = require('pg');
 let express = require('express');
 let app = express();
 
+const postgres = new PostgresClass();
 const initializePostgres = async () => {
-	const postgres = new PostgresClass();
 	await postgres.init();
+	console.log(postgres.connectedStatus);
 	const result = await postgres.getTasks('GET_TASKS');
 
 	console.log(result);

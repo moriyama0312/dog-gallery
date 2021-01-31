@@ -62,11 +62,18 @@ const DbSetting: DbSetting = {
 class Postgres {
 	private pool: any;
 	private client: any;
+	private isConnected: boolean;
 	async init() {
 		if(!this.pool) {
 			this.pool = new Pool(DbSetting);
 		}
-		this.client = await this.pool.connect();
+		try {
+			this.client = await this.pool.connect();
+			this.isConnected = true;
+		}catch(err) {
+			console.log(err);
+			this.isConnected = false;
+		}
 	}
 	async query(query: string, params?: string[]) {
 		let result = {
@@ -118,6 +125,9 @@ class Postgres {
 		const query = queryCreator(type, payload);
 		const params = Object.keys(payload).map(item => item);
 		return await this.query(query, params);
+	}
+	get connectedStatus() {
+		return this.isConnected;
 	}
 }
 
