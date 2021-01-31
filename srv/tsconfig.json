@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"outDir": "dist/assets/js",
+		"target": "es5",
+		"module": "CommonJS",
+		"types": [
+			"node", "express"
+		],
+		"lib": ["dom", "esnext"],
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"allowJs": true,
+		"skipLibCheck": true,
+		// "esModuleInterop": true,
+		// "allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"strictPropertyInitialization": false
+	}
+}
