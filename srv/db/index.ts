@@ -35,20 +35,25 @@ export class Postgres {
 			return err;
 		}
 	}
-	async getTasks(type: string, payload?: interfaces.GetTasks) {
+	async getMethod<T>(type: string, payload?: T) {
 		const query = queryCreator(type, payload);
 		const params = (payload) ? Object.keys(payload).map(item => item) : [];
 		return await this.query(query, params);
 	}
-	async getProfiles(type: string, payload?: interfaces.GetProfiles) {
-		const query = queryCreator(type, payload);
-		const params = (payload) ? Object.keys(payload).map(item => item) : [];
-		return await this.query(query, params);
-	}
-	async getIcons(type: string) {
-		const query = queryCreator(type);
-		return await this.query(query);
-	}
+	// async getTasks(type: string, payload?: interfaces.GetTasks) {
+	// 	const query = queryCreator(type, payload);
+	// 	const params = (payload) ? Object.keys(payload).map(item => item) : [];
+	// 	return await this.query(query, params);
+	// }
+	// async getProfiles(type: string, payload?: interfaces.GetProfiles) {
+	// 	const query = queryCreator(type, payload);
+	// 	const params = (payload) ? Object.keys(payload).map(item => item) : [];
+	// 	return await this.query(query, params);
+	// }
+	// async getIcons(type: string) {
+	// 	const query = queryCreator(type);
+	// 	return await this.query(query);
+	// }
 	async postTasks(type: string, payload: interfaces.PostTasks) {
 		const query = queryCreator(type, payload);
 		const params = Object.keys(payload).map(item => item);
