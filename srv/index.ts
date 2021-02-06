@@ -1,11 +1,8 @@
-const { PostgresClass } = require('./db/index');
-// const { Client } = require('pg');
-// import { Client } from 'pg';
-// let express = require('express');
 import * as express from 'express';
+import { Postgres } from './db/index';
 let app: express.Express = express();
 
-const postgres = new PostgresClass();
+const postgres = new Postgres();
 const initializePostgres = async () => {
 	await postgres.init();
 	console.log(postgres.connectedStatus);

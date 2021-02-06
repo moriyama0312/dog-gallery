@@ -72,5 +72,4 @@ const queryCreator = (type: string, payload?: Payload) => {
 	return query;
 };
 
-// module.exports.queryCreator = querySwitch;
 export default queryCreator;

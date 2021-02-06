@@ -1,72 +1,15 @@
-// const { Pool } = require('pg');
-// const { queryCreator } = require('./query.ts');
-import { Pool } from 'pg';
+import { Pool, PoolClient } from 'pg';
 import queryCreator from './query';
 import * as interfaces from '../include/interface';
 
-console.log(interfaces);
-
-// Payload関連
-// Get
-// interface GetTasks {
-// 	id?: number,
-// 	user?: string,
-// 	status?: number,
-// 	range?: number
-// }
-// interface GetProfiles {
-// 	user?: string
-// }
-// // Post
-// interface PostTasks {
-// 	title: string,
-// 	detail: string,
-// 	status: number,
-// 	category: number,
-// 	createdby: string,
-// 	charged: string,
-// 	deadline?: Date
-// }
-// // interface PostProfiles {
-// // 	id: string,
-// // 	name: string,
-// // 	intro?: string,
-// // 	icon?: number
-// // }
-// // Put
-// interface PutTasks {
-// 	id: number,
-// 	title?: string,
-// 	detail?: string,
-// 	status?: number,
-// 	category?: number,
-// 	charged?: string,
-// 	deadline?: Date
-// }
-// interface PutProfiles {
-// 	id: string,
-// 	name?: string,
-// 	intro?: string,
-// 	icon?: number
-// }
-// // Delete
-// interface DeleteTasks {
-// 	id: number
-// }
-
-// // DBへの接続
-// interface DbSetting {
-// 	connectionString: string;
-// 	ssl: { rejectUnauthorized: boolean };
-// }
 const DbSetting: interfaces.DbSetting = {
 	connectionString: process.env.DATABASE_URL || 'postgres://ltekopzxfbigxk:8a231cb186de5400a491174de781f37bc1d0373c111dcca1acd4d305fc8cc741@ec2-54-156-73-147.compute-1.amazonaws.com:5432/d8vf9g7eb00i29',
 	ssl: { rejectUnauthorized: false }
 };
 
-class Postgres {
-	private pool: any;
-	private client: any;
+export class Postgres {
+	private pool: Pool;
+	private client: PoolClient;
 	private isConnected: boolean;
 	async init() {
 		if(!this.pool) {
@@ -135,5 +78,3 @@ class Postgres {
 		return this.isConnected;
 	}
 }
-
-module.exports.PostgresClass = Postgres;
