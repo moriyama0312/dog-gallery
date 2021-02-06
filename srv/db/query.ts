@@ -1,8 +1,8 @@
 interface Payload {
-	[key: string]: string | number | Date;
+	[key: string]: any;
 }
 
-const querySwitch = (type: string, payload?: Payload) => {
+const queryCreator = (type: string, payload?: Payload) => {
 	let query = '';
 	switch(type) {
 		case 'GET_TASKS':
@@ -72,4 +72,5 @@ const querySwitch = (type: string, payload?: Payload) => {
 	return query;
 };
 
-module.exports.queryCreator = querySwitch;
+// module.exports.queryCreator = querySwitch;
+export default queryCreator;
