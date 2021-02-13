@@ -9,6 +9,9 @@ export interface GetTasks {
 export interface GetProfiles {
 	user?: string
 }
+export interface GetIcons {
+	id?: number
+}
 // Post
 export interface PostTasks {
 	title: string,

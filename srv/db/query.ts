@@ -20,14 +20,18 @@ const queryCreator = (type: string, payload: Payload) => {
 			}
 			break;
 		case 'GET_PROFILES':
-			if(!payload) {
+			if(isEmptyPayload) {
 				query = 'SELECT * FROM profiles_tbl;'
 			}else if(payload.user) {
 				query = 'SELECT * FROM profiles_tbl WHERE profile_id = $1;';
 			}
 			break;
 		case 'GET_ICONS':
-			query = 'SELECT * FROM icons_tbl;';
+			if(isEmptyPayload) {
+				query = 'SELECT * FROM icons_tbl;';
+			}else if(payload.id) {
+				query = 'SELECT * FROM icons_tbl WHERE id = $1';
+			}
 			break;
 		case 'POST_TASKS':
 			if(payload) {

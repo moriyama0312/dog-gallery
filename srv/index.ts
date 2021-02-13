@@ -34,6 +34,9 @@ app.get('/api/:type', async (req, res) => {
 		}else if(type === 'profiles') {
 			const result = await postgres.getMethod<interfaces.GetProfiles>('GET_PROFILES', query);
 			res.send(result);
+		}else if(type === 'icons') {
+			const result = await postgres.getMethod<interfaces.GetIcons>('GET_ICONS', query);
+			res.send(result);
 		}
 	}catch(err) {
 		res.send(err);
