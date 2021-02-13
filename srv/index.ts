@@ -28,7 +28,6 @@ app.get('/api/:type', async (req, res) => {
 
 	try {
 		if(type === 'tasks') {
-			// const result = await postgres.getTasks('GET_TASKS');
 			const result = await postgres.getMethod<interfaces.GetTasks>('GET_TASKS', query);
 			res.send(result);
 		}else if(type === 'profiles') {

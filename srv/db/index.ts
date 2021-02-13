@@ -37,7 +37,7 @@ export class Postgres {
 	}
 	async getMethod<T>(type: string, payload: T) {
 		const query = queryCreator(type, payload);
-		const params: Array<T[keyof T]> = (Object.keys(payload).length > 0) ? Object.keys(payload).map((item: string): T[keyof T] => payload[item]) : [];
+		const params = (Object.keys(payload) as (keyof T)[]).map((item: keyof T) => payload[item]) || [];
 
 		return await this.query<T>(query, params);
 	}
@@ -59,7 +59,7 @@ export class Postgres {
 	// いったんエラー回避のため隠す
 	// async postTasks(type: string, payload: interfaces.PostTasks) {
 	// 	const query = queryCreator(type, payload);
-	// 	const params = Object.keys(payload).map(item => item);
+	// 	const params = Object.keys(payload).map((item): interfaces.PostTasks[keyof interfaces.PostTasks] => payload[item]);
 	// 	return await this.query(query, params);
 	// }
 	// async postProfiles(type: string, payload: interfaces.PostTasks) {
