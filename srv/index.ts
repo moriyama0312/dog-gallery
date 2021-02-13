@@ -16,17 +16,25 @@ initializePostgres();
 // app.get('/', () => {
 // 	console.log('hoge');
 // });
-app.get('/api/tasks', async (req, res) => {
-	console.log(req);
+app.get('/api/:type', async (req, res) => {
+	// console.log(req);
+	console.log(req.query);
+	const type = req.params.type;
+	const query = req.query;
 
 	if(!postgres.connectedStatus) {
 		await postgres.init();
 	}
 
 	try {
-		// const result = await postgres.getTasks('GET_TASKS');
-		const result = await postgres.getMethod<interfaces.GetTasks>('GET_TASKS');
-		res.send(result);
+		if(type === 'tasks') {
+			// const result = await postgres.getTasks('GET_TASKS');
+			const result = await postgres.getMethod<interfaces.GetTasks>('GET_TASKS', query);
+			res.send(result);
+		}else if(type === 'profiles') {
+			const result = await postgres.getMethod<interfaces.GetProfiles>('GET_PROFILES', query);
+			res.send(result);
+		}
 	}catch(err) {
 		res.send(err);
 	}

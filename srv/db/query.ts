@@ -2,11 +2,12 @@ interface Payload {
 	[key: string]: any;
 }
 
-const queryCreator = (type: string, payload?: Payload) => {
+const queryCreator = (type: string, payload: Payload) => {
 	let query = '';
+	const isEmptyPayload = (Object.keys(payload).length === 0) ? true : false;
 	switch(type) {
 		case 'GET_TASKS':
-			if(!payload) {
+			if(isEmptyPayload) {
 				query = 'SELECT * FROM tasks_tbl;';
 			}else if(payload.id) {
 				query = 'SELECT * FROM tasks_tbl WHERE task_id = $1;';

@@ -23,7 +23,7 @@ export class Postgres {
 			this.isConnected = false;
 		}
 	}
-	async query(query: string, params?: string[]) {
+	async query<T>(query: string, params: Array<T[keyof T]>) {
 		let result = {
 			rows: []
 		};
@@ -35,10 +35,11 @@ export class Postgres {
 			return err;
 		}
 	}
-	async getMethod<T>(type: string, payload?: T) {
+	async getMethod<T>(type: string, payload: T) {
 		const query = queryCreator(type, payload);
-		const params = (payload) ? Object.keys(payload).map(item => item) : [];
-		return await this.query(query, params);
+		const params: Array<T[keyof T]> = (Object.keys(payload).length > 0) ? Object.keys(payload).map((item: string): T[keyof T] => payload[item]) : [];
+
+		return await this.query<T>(query, params);
 	}
 	// async getTasks(type: string, payload?: interfaces.GetTasks) {
 	// 	const query = queryCreator(type, payload);
@@ -54,31 +55,33 @@ export class Postgres {
 	// 	const query = queryCreator(type);
 	// 	return await this.query(query);
 	// }
-	async postTasks(type: string, payload: interfaces.PostTasks) {
-		const query = queryCreator(type, payload);
-		const params = Object.keys(payload).map(item => item);
-		return await this.query(query, params);
-	}
-	async postProfiles(type: string, payload: interfaces.PostTasks) {
-		const query = queryCreator(type, payload);
-		const params = Object.keys(payload).map(item => item);
-		return await this.query(query, params);
-	}
-	async putTasks(type: string, payload: interfaces.PutTasks) {
-		const query = queryCreator(type, payload);
-		const params = Object.keys(payload).map(item => item);
-		return await this.query(query, params);
-	}
-	async putProfiles(type: string, payload: interfaces.PutProfiles) {
-		const query = queryCreator(type, payload);
-		const params = Object.keys(payload).map(item => item);
-		return await this.query(query, params);
-	}
-	async deleteTasks(type: string, payload: interfaces.DeleteTasks) {
-		const query = queryCreator(type, payload);
-		const params = Object.keys(payload).map(item => item);
-		return await this.query(query, params);
-	}
+
+	// いったんエラー回避のため隠す
+	// async postTasks(type: string, payload: interfaces.PostTasks) {
+	// 	const query = queryCreator(type, payload);
+	// 	const params = Object.keys(payload).map(item => item);
+	// 	return await this.query(query, params);
+	// }
+	// async postProfiles(type: string, payload: interfaces.PostTasks) {
+	// 	const query = queryCreator(type, payload);
+	// 	const params = Object.keys(payload).map(item => item);
+	// 	return await this.query(query, params);
+	// }
+	// async putTasks(type: string, payload: interfaces.PutTasks) {
+	// 	const query = queryCreator(type, payload);
+	// 	const params = Object.keys(payload).map(item => item);
+	// 	return await this.query(query, params);
+	// }
+	// async putProfiles(type: string, payload: interfaces.PutProfiles) {
+	// 	const query = queryCreator(type, payload);
+	// 	const params = Object.keys(payload).map(item => item);
+	// 	return await this.query(query, params);
+	// }
+	// async deleteTasks(type: string, payload: interfaces.DeleteTasks) {
+	// 	const query = queryCreator(type, payload);
+	// 	const params = Object.keys(payload).map(item => item);
+	// 	return await this.query(query, params);
+	// }
 	get connectedStatus() {
 		return this.isConnected;
 	}
