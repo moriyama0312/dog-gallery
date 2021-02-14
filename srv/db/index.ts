@@ -57,11 +57,11 @@ export class Postgres {
 	// }
 
 	// いったんエラー回避のため隠す
-	// async postTasks(type: string, payload: interfaces.PostTasks) {
-	// 	const query = queryCreator(type, payload);
-	// 	const params = Object.keys(payload).map((item): interfaces.PostTasks[keyof interfaces.PostTasks] => payload[item]);
-	// 	return await this.query(query, params);
-	// }
+	async postTasks(type: string, payload: interfaces.PostTasks) {
+		const query = queryCreator(type, payload);
+		const params = (Object.keys(payload) as (keyof interfaces.PostTasks)[]).map((item: keyof interfaces.PostTasks) => payload[item]);
+		return await this.query<interfaces.PostTasks>(query, params);
+	}
 	// async postProfiles(type: string, payload: interfaces.PostTasks) {
 	// 	const query = queryCreator(type, payload);
 	// 	const params = Object.keys(payload).map(item => item);
