@@ -20,7 +20,7 @@ export interface PostTasks {
 	category: number,
 	createdby: string,
 	charged: string,
-	deadline?: Date
+	deadline?: string
 }
 // interface PostProfiles {
 // 	id: string,
@@ -36,7 +36,7 @@ export interface PutTasks {
 	status?: number,
 	category?: number,
 	charged?: string,
-	deadline?: Date
+	deadline?: string
 }
 export interface PutProfiles {
 	id: string,

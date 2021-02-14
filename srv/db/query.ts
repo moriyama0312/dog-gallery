@@ -37,6 +37,8 @@ const queryCreator = (type: string, payload: Payload) => {
 			if(payload) {
 				if(payload.deadline) {
 					// deadlineのDate型を変換するか考える
+					// date型はDBがTIME_STAMPで2019-03-01 10:00:00のように保管されている
+					// サーバーでDate型への変換は簡単なのでこの形に変換すると良さそう
 					query = 'INSERT INTO tasks_tbl (task_title, task_detail, task_status, task_category, task_createdby, task_charged, task_deadline) VALUES ($1, $2, $3, $4, $5, $6, $7);';
 				}else {
 					query = 'INSERT INTO tasks_tbl (task_title, task_detail, task_status, task_category, task_createdby, task_charged) VALUES ($1, $2, $3, $4, $5, $6);';

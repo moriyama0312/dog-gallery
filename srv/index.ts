@@ -3,6 +3,8 @@ import { Postgres } from './db/index';
 import * as interfaces from './include/interface';
 let app: express.Express = express();
 
+app.use(express.json());
+
 const postgres = new Postgres();
 const initializePostgres = async () => {
 	await postgres.init();
@@ -40,7 +42,32 @@ app.get('/api/:type', async (req, res) => {
 	}catch(err) {
 		res.send(err);
 	}
+});
 
+app.post('/api/:type', async (req, res) => {
+	const type = req.params.type;
+	// const query = req.query;
+	console.log(req.body);
+
+	if(!postgres.connectedStatus) {
+		await postgres.init();
+	}
+
+	try {
+		if(type === 'tasks') {
+			const bodyObj = {
+				title: 'Postテスト用',
+				detail: 'テスト用の内容です',
+				status: 1,
+				category: 3,
+				createdby: 'mory',
+				charged: 'mory',
+				deadline: new Date('2021-03-31 10:00:00')
+			};
+		}
+	}catch(err) {
+		res.send(err);
+	}
 });
 
 const port = 3001;

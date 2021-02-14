@@ -1,4 +1,5 @@
 import { Pool, PoolClient } from 'pg';
+import * as dayjs from 'dayjs';
 import queryCreator from './query';
 import * as interfaces from '../include/interface';
 
@@ -58,6 +59,10 @@ export class Postgres {
 
 	// いったんエラー回避のため隠す
 	async postTasks(type: string, payload: interfaces.PostTasks) {
+		if(payload.deadline) {
+			payload.deadline = dayjs(payload.deadline).format('YYYY-MM-DD HH:mm:ss');
+			console.log(payload.deadline);
+		}
 		const query = queryCreator(type, payload);
 		const params = (Object.keys(payload) as (keyof interfaces.PostTasks)[]).map((item: keyof interfaces.PostTasks) => payload[item]);
 		return await this.query<interfaces.PostTasks>(query, params);
