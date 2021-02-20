@@ -9,7 +9,7 @@
 		"plugin:react-hooks/recommended"
 	],
 	"plugins": [
-		"@typescript-eslint",
+		"@typescript-eslint/eslint-plugin",
 		"react",
 		"react-hooks"
 	],

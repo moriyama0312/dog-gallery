@@ -56,6 +56,6 @@ module.exports = {
 		publicPath: '/js/'
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', 'scss', 'css']
+		extensions: ['.ts', '.tsx', '.js', '.scss', '.css']
 	}
 }

@@ -1,5 +1,9 @@
 {
-	"exclude": [
-		"."
+	// "exclude": [
+	// 	"."
+	// ],
+	"include": [
+		"./src/tsx/**/*.tsx",
+		"./srv/**/*.ts"
 	]
 }
