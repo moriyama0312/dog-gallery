@@ -1,19 +1,19 @@
 import React, { FC } from 'react';
-import TopComponent, {Task} from '../components/Top';
+import TopComponent from '../components/Top';
 
 const TopContainer: FC = () => {
-	const TaskList: Task[] = [
+	const TaskList = [
 		{
 			id: 1,
 			title: 'Test Task',
 			detail: 'Test用のタスクです',
-			status: 'not-started',
+			status: 'not-started' as const,
 		},
 		{
 			id: 2,
 			title: 'Test Task2',
 			detail: 'Test用のタスク2です',
-			status: 'working',
+			status: 'working' as const,
 		}
 	];
 

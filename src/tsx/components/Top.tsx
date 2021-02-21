@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import Styles from '../../sass/_inc/_components/_Top.scss';
+import { Style } from '../interfaces/index';
+
+const Style = Styles as Style;
 
 interface Status {
 	id: string;
@@ -13,7 +16,6 @@ export interface Task {
 	status: 'not-started' | 'working' | 'complete';
 	deadline?: Date;
 }
-// type TopProps = Task[];
 interface TopProps {
 	TaskList: Task[];
 }
@@ -36,14 +38,14 @@ const TopComponent: FC<TopProps> = ({TaskList}) => {
 	];
 
 	return (
-		<div className={Styles.container}>
+		<div className={Style.container}>
 			{StatusList.map((status) => (
-				<div key={status.id} className={Styles.block}>
-					<h3 className={Styles.block__title}>{status.label}</h3>
-					<div className={Styles.block__tasks}>
+				<div key={status.id} className={Style.block}>
+					<h3 className={Style.block__title}>{status.label}</h3>
+					<div className={Style.block__tasks}>
 						{TaskList.filter((task) => task.status === status.id).map((item) => (
-							<Link key={item.id} to={`/tasks/${item.id}`} className={Styles.task}>
-								<h4 className={Styles.task__title}>{item.title}</h4>
+							<Link key={item.id} to={`/tasks/${item.id}`} className={Style.task}>
+								<h4 className={Style.task__title}>{item.title}</h4>
 							</Link>
 						))}
 					</div>
