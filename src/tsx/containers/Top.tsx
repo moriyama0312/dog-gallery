@@ -1,7 +1,33 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 import TopComponent from '../components/Top';
+import Axios from 'axios';
 
 const TopContainer: FC = () => {
+	const useGetTask = () => {
+		const [loading, setLoading] = useState(false);
+		const [err, setErr] = useState('');
+
+		const getTask = useCallback(async () => {
+			setLoading(true);
+			try {
+				const taskList = await Axios.get('/api/tasks');
+				console.log(taskList);
+				setLoading(false);
+			}catch(error) {
+				setErr(error.message);
+				setLoading(false);
+			}
+		}, []);
+
+		return [loading, err, getTask];
+	}
+
+	const [loading, err, getTask] = useGetTask();
+
+	useEffect(() => {
+		getTask();
+	});
+
 	const TaskList = [
 		{
 			id: 1,
