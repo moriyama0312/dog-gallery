@@ -4,29 +4,43 @@ import Axios from 'axios';
 
 const TopContainer: FC = () => {
 	const useGetTask = () => {
+		interface useGetTask {
+			loading: boolean;
+			err: string;
+			getTask: () => Promise<void>;
+		}
 		const [loading, setLoading] = useState(false);
 		const [err, setErr] = useState('');
 
 		const getTask = useCallback(async () => {
 			setLoading(true);
 			try {
-				const taskList = await Axios.get('/api/tasks');
+				let taskList;
+				await Axios.get(
+					'/api/tasks'
+				).then((res) => {
+					taskList = res;
+				}).catch(() => {
+					throw new Error('Connection Error!');
+				});
 				console.log(taskList);
 				setLoading(false);
 			}catch(error) {
-				setErr(error.message);
+				setErr(error);
 				setLoading(false);
 			}
 		}, []);
 
-		return [loading, err, getTask];
+		const returnObj: useGetTask = {loading, err, getTask};
+
+		return returnObj;
 	}
 
-	const [loading, err, getTask] = useGetTask();
+	const {loading, err, getTask} = useGetTask();
 
 	useEffect(() => {
 		getTask();
-	});
+	}, []);
 
 	const TaskList = [
 		{
@@ -43,7 +57,12 @@ const TopContainer: FC = () => {
 		}
 	];
 
-	return <TopComponent TaskList={TaskList} />;
+	const fetchStatus: {
+		loading: boolean;
+		err: string;
+	} = {loading, err};
+
+	return <TopComponent fetchStatus={fetchStatus} TaskList={TaskList} />;
 };
 
 export default TopContainer;

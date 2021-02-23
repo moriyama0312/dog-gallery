@@ -18,10 +18,14 @@ export interface Task {
 }
 interface TopProps {
 	TaskList: Task[];
+	fetchStatus: {
+		loading: boolean;
+		err: string;
+	};
 }
 
 
-const TopComponent: FC<TopProps> = ({TaskList}) => {
+const TopComponent: FC<TopProps> = ({TaskList, fetchStatus}) => {
 	const StatusList: Status[] = [
 		{
 			id: 'not-started',
@@ -36,6 +40,12 @@ const TopComponent: FC<TopProps> = ({TaskList}) => {
 			label: '完了'
 		}
 	];
+
+	if(fetchStatus.loading) {
+		return <p>loading...</p>;
+	}else if(fetchStatus.err) {
+		return <p>Connection Err!</p>;
+	}
 
 	return (
 		<div className={Style.container}>

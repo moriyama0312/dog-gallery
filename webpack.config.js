@@ -16,7 +16,8 @@ module.exports = {
 				secure: false,
 				logLevel: 'debug'
 			}
-		}
+		},
+		clientLogLevel: 'silent'
 	},
 	entry: './src/tsx/index.tsx',
 	module: {
