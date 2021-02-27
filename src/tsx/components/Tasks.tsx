@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import {Task} from '../interfaces/index';
 import Styles from '../../sass/_inc/_components/_Tasks.scss';
 import { Style } from '../interfaces/index';
 
@@ -8,15 +9,6 @@ const Style = Styles as Style;
 interface Status {
 	id: string;
 	label: string;
-}
-export interface Task {
-	id: number;
-	title: string;
-	detail: string;
-	status: 'not-started' | 'working' | 'complete';
-	category: string;
-	created_day: number;
-	deadline?: Date;
 }
 
 type TasksProps = {Task: Task} & RouteComponentProps<{ id: string }>;

@@ -1,5 +1,6 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
 import TopComponent from '../components/Top';
+import {Task} from '../interfaces/index';
 import Axios from 'axios';
 
 const TopContainer: FC = () => {
@@ -7,27 +8,36 @@ const TopContainer: FC = () => {
 		interface useGetTask {
 			loading: boolean;
 			err: string;
-			getTask: () => Promise<void>;
+			getTask: () => Promise<Task[]>;
 		}
+		const [TaskList, setTaskList] = useState<Task[]>([]);
 		const [loading, setLoading] = useState(false);
 		const [err, setErr] = useState('');
+		let tmpTaskArray: Task[] = [];
 
 		const getTask = useCallback(async () => {
 			setLoading(true);
 			try {
-				let taskList;
-				await Axios.get(
+				console.log('before');
+				await Axios.get<Task[]>(
 					'/api/tasks'
 				).then((res) => {
-					taskList = res;
+					tmpTaskArray = [...tmpTaskArray, ...res.data];
+					setTaskList(res.data);
 				}).catch(() => {
 					throw new Error('Connection Error!');
 				});
-				console.log(taskList);
+				console.log('aaaaaa');
+				console.log(TaskList);
+				console.log(tmpTaskArray);
 				setLoading(false);
+
+				return tmpTaskArray;
 			}catch(error) {
 				setErr(error);
 				setLoading(false);
+
+				return tmpTaskArray;
 			}
 		}, []);
 
@@ -37,25 +47,15 @@ const TopContainer: FC = () => {
 	}
 
 	const {loading, err, getTask} = useGetTask();
+	let TaskList: Task[] = [];
 
 	useEffect(() => {
-		getTask();
+		(async () => {
+			TaskList = [...TaskList,...(await getTask())];
+			console.log(TaskList);
+			console.log('bbbbbbb');
+		})();
 	}, []);
-
-	const TaskList = [
-		{
-			id: 1,
-			title: 'Test Task',
-			detail: 'Test用のタスクです',
-			status: 'not-started' as const,
-		},
-		{
-			id: 2,
-			title: 'Test Task2',
-			detail: 'Test用のタスク2です',
-			status: 'working' as const,
-		}
-	];
 
 	const fetchStatus: {
 		loading: boolean;

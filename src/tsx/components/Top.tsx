@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import {Task} from '../interfaces/index';
 import Styles from '../../sass/_inc/_components/_Top.scss';
 import { Style } from '../interfaces/index';
 
@@ -8,13 +9,6 @@ const Style = Styles as Style;
 interface Status {
 	id: string;
 	label: string;
-}
-export interface Task {
-	id: number;
-	title: string;
-	detail: string;
-	status: 'not-started' | 'working' | 'complete';
-	deadline?: Date;
 }
 interface TopProps {
 	TaskList: Task[];
@@ -46,6 +40,7 @@ const TopComponent: FC<TopProps> = ({TaskList, fetchStatus}) => {
 	}else if(fetchStatus.err) {
 		return <p>Connection Err!</p>;
 	}
+	console.log(TaskList);
 
 	return (
 		<div className={Style.container}>
