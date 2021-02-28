@@ -8,7 +8,7 @@ const TopContainer: FC = () => {
 		interface useGetTask {
 			loading: boolean;
 			err: string;
-			getTask: () => Promise<Task[]>;
+			TaskList: Task[];
 		}
 		const [TaskList, setTaskList] = useState<Task[]>([]);
 		const [loading, setLoading] = useState(false);
@@ -18,18 +18,13 @@ const TopContainer: FC = () => {
 		const getTask = useCallback(async () => {
 			setLoading(true);
 			try {
-				console.log('before');
 				await Axios.get<Task[]>(
 					'/api/tasks'
 				).then((res) => {
 					tmpTaskArray = [...tmpTaskArray, ...res.data];
-					setTaskList(res.data);
 				}).catch(() => {
 					throw new Error('Connection Error!');
 				});
-				console.log('aaaaaa');
-				console.log(TaskList);
-				console.log(tmpTaskArray);
 				setLoading(false);
 
 				return tmpTaskArray;
@@ -41,21 +36,18 @@ const TopContainer: FC = () => {
 			}
 		}, []);
 
-		const returnObj: useGetTask = {loading, err, getTask};
+		useEffect(() => {
+			(async () => {
+				setTaskList(await getTask());
+			})();
+		}, []);
+
+		const returnObj: useGetTask = {loading, err, TaskList};
 
 		return returnObj;
 	}
 
-	const {loading, err, getTask} = useGetTask();
-	let TaskList: Task[] = [];
-
-	useEffect(() => {
-		(async () => {
-			TaskList = [...TaskList,...(await getTask())];
-			console.log(TaskList);
-			console.log('bbbbbbb');
-		})();
-	}, []);
+	const {loading, err, TaskList} = useGetTask();
 
 	const fetchStatus: {
 		loading: boolean;
