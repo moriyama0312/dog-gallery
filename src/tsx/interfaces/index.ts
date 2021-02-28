@@ -3,11 +3,19 @@ export interface Style {
 }
 
 export interface Task {
-	id: number;
-	title: string;
-	detail: string;
-	status: 'not-started' | 'working' | 'complete';
-	category: string;
-	created_day: number;
-	deadline?: Date;
+	task_id: number;
+	task_title: string;
+	task_detail: string;
+	task_status: number;
+	task_category: number;
+	task_created: number;
+	task_createdby: string;
+	task_charged: string;
+	task_deadline?: Date;
+}
+
+export interface Status {
+	index: number;
+	id: string;
+	label: string;
 }

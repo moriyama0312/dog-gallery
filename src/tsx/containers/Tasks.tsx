@@ -3,12 +3,14 @@ import TasksComponent from '../components/Tasks';
 
 const TasksContainer: FC = () => {
 	const Task = {
-		id: 1,
-		title: 'Test Task',
-		detail: 'Test用のタスクです',
-		status: 'not-started' as const,
-		category: '趣味',
-		created_day: Date.now()
+		task_id: 1,
+		task_title: 'Test Task',
+		task_detail: 'Test用のタスクです',
+		task_status: 1,
+		task_category: 1,
+		task_charged: "mory",
+		task_created: Date.now(),
+		task_createdby: "mory"
 	};
 
 	return <TasksComponent Task={Task} />;
