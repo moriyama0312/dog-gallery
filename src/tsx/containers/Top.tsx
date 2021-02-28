@@ -1,4 +1,6 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { add } from '../reducers/taskListSlice';
 import TopComponent from '../components/Top';
 import {Task} from '../interfaces/index';
 import Axios from 'axios';
@@ -13,6 +15,7 @@ const TopContainer: FC = () => {
 		const [TaskList, setTaskList] = useState<Task[]>([]);
 		const [loading, setLoading] = useState(false);
 		const [err, setErr] = useState('');
+		const dispatch = useDispatch();
 		let tmpTaskArray: Task[] = [];
 
 		const getTask = useCallback(async () => {
@@ -22,6 +25,7 @@ const TopContainer: FC = () => {
 					'/api/tasks'
 				).then((res) => {
 					tmpTaskArray = [...tmpTaskArray, ...res.data];
+					dispatch(add({taskList: tmpTaskArray}));
 				}).catch(() => {
 					throw new Error('Connection Error!');
 				});

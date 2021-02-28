@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { selectTaskList } from '../reducers/taskListSlice'
 import TasksComponent from '../components/Tasks';
 
 const TasksContainer: FC = () => {
+	const taskList = useSelector(selectTaskList);
+	console.log(taskList);
 	const Task = {
 		task_id: 1,
 		task_title: 'Test Task',
