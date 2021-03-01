@@ -1,23 +1,25 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
 import { selectTaskList } from '../reducers/taskListSlice'
 import TasksComponent from '../components/Tasks';
 
 const TasksContainer: FC = () => {
-	const taskList = useSelector(selectTaskList);
-	console.log(taskList);
-	const Task = {
-		task_id: 1,
-		task_title: 'Test Task',
-		task_detail: 'Test用のタスクです',
-		task_status: 1,
-		task_category: 1,
-		task_charged: "mory",
-		task_created: Date.now(),
-		task_createdby: "mory"
-	};
+	const { id } = useParams<{id: string}>();
+	const Task = useSelector(selectTaskList).filter((task) => task.task_id === Number(id))[0];
+	console.log(Task);
+	// const Task = {
+	// 	task_id: 1,
+	// 	task_title: 'Test Task',
+	// 	task_detail: 'Test用のタスクです',
+	// 	task_status: 1,
+	// 	task_category: 1,
+	// 	task_charged: "mory",
+	// 	task_created: Date.now(),
+	// 	task_createdby: "mory"
+	// };
 
-	return <TasksComponent Task={Task} />;
+	return <TasksComponent Task={Task} id={id} />;
 };
 
 export default TasksContainer;

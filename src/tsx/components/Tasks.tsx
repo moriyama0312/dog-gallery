@@ -1,15 +1,18 @@
 import React, { FC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import {Task, Status} from '../interfaces/index';
 import Styles from '../../sass/_inc/_components/_Tasks.scss';
 import { Style } from '../interfaces/index';
 
 const Style = Styles as Style;
 
-type TasksProps = {Task: Task} & RouteComponentProps<{ id: string }>;
+// type TasksProps = {Task: Task} & {id: string};
+type TasksProps = {
+	Task: Task;
+	id: string;
+};
 
-const TasksComponent: FC<TasksProps> = ({ Task, match }) => {
-	const id = match.params.id;
+const TasksComponent: FC<TasksProps> = ({ Task, id }) => {
+	// const id = match.params.id;
 	const StatusList: Status[] = [
 		{
 			index: 1,
@@ -39,7 +42,7 @@ const TasksComponent: FC<TasksProps> = ({ Task, match }) => {
 		<div className={Style.container}>
 			<div className={Style.task}>
 				<h3 className={Style.task__title}>タスク名</h3>
-				<p className={Style.task__text}>{Task.task_title}(id: {id})</p>
+				<p className={Style.task__text}>{Task.task_title}(id: { id })</p>
 				<h3 className={Style.task__title}>タスクの詳細</h3>
 				<p className={Style.task__text}>{Task.task_detail}</p>
 				<h3 className={Style.task__title}>ステータス</h3>
@@ -53,4 +56,4 @@ const TasksComponent: FC<TasksProps> = ({ Task, match }) => {
 	);
 };
 
-export default withRouter(TasksComponent);
+export default TasksComponent;
