@@ -20,7 +20,7 @@ interface PayloadActionFetchState {
 const initialState: TaskListInitial = {
 	taskList: [],
 	fetchState: {
-		loading: false,
+		loading: true,
 		err: ''
 	}
 };

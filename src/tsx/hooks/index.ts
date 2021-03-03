@@ -5,15 +5,16 @@ import { add, setFetchState } from '../reducers/taskListSlice';
 import { Task } from '../interfaces/index';
 import Axios from 'axios';
 
+interface useGetTask {
+	loading: boolean;
+	err: string;
+	TaskList: Task[];
+}
+
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const useGetTask = () => {
-	interface useGetTask {
-		loading: boolean;
-		err: string;
-		TaskList: Task[];
-	}
+export const useGetTask = (): useGetTask => {
 	const [TaskList, setTaskList] = useState<Task[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [err, setErr] = useState('');
@@ -51,7 +52,7 @@ export const useGetTask = () => {
 		})();
 	}, []);
 
-	const returnObj: useGetTask = {loading, err, TaskList};
+	const returnObj = {loading, err, TaskList};
 
 	return returnObj;
 };
