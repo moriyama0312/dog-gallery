@@ -17,7 +17,8 @@ module.exports = {
 				logLevel: 'debug'
 			}
 		},
-		clientLogLevel: 'silent'
+		clientLogLevel: 'silent',
+		historyApiFallback: true
 	},
 	entry: './src/tsx/index.tsx',
 	module: {
