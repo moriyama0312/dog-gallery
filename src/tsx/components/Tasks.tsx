@@ -5,14 +5,12 @@ import { Style } from '../interfaces/index';
 
 const Style = Styles as Style;
 
-// type TasksProps = {Task: Task} & {id: string};
 type TasksProps = {
 	Task: Task;
 	id: string;
 };
 
 const TasksComponent: FC<TasksProps> = ({ Task, id }) => {
-	// const id = match.params.id;
 	const StatusList: Status[] = [
 		{
 			index: 1,
