@@ -58,7 +58,7 @@ export const taskListSlice = createSlice({
 	}
 });
 
-export const selectTaskList = (state: RootState) => state.taskList.taskList;
-export const selectFetchState = (state: RootState) => state.taskList.fetchState;
+export const selectTaskList = (state: RootState): Task[] => state.taskList.taskList;
+export const selectFetchState = (state: RootState): {loading: boolean, err: string} => state.taskList.fetchState;
 export const { add, setFetchState } = taskListSlice.actions;
 export default taskListSlice.reducer;

@@ -50,7 +50,7 @@ export const useGetTask = (): useGetTask => {
 		(async () => {
 			setTaskList(await getTask());
 		})();
-	}, []);
+	}, [getTask]);
 
 	const returnObj = {loading, err, TaskList};
 
