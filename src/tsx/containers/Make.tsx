@@ -1,4 +1,6 @@
 import React, { FC, FormEvent, ChangeEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserList } from '../reducers/taskListSlice';
 import MakeComponent from '../components/Make';
 
 const MakeContainer: FC = () => {
@@ -27,11 +29,15 @@ const MakeContainer: FC = () => {
 	};
 	const [formValue, setFormValue] = useState(initialFormValue);
 	const [deadline, setDeadline] = useState(initialDeadline);
+	const userList = useSelector(selectUserList);
+	const dispatch = useDispatch();
+	console.log(userList, dispatch);
 
 	const submitHandler = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		console.log(e.target);
 		console.log(formValue);
+		// dispatch(add({taskList: [formValue]}));
 	};
 	const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const key = e.target.name;

@@ -19,3 +19,11 @@ export interface Status {
 	id: string;
 	label: string;
 }
+
+export interface User {
+	profile_id: string;
+	profile_name: string;
+	profile_intro: string;
+	profile_icon: number;
+	profile_created: Date;
+}
