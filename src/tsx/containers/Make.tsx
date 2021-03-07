@@ -1,5 +1,5 @@
 import React, { FC, FormEvent, ChangeEvent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectUserList } from '../reducers/taskListSlice';
 import MakeComponent from '../components/Make';
 
@@ -30,16 +30,15 @@ const MakeContainer: FC = () => {
 	const [formValue, setFormValue] = useState(initialFormValue);
 	const [deadline, setDeadline] = useState(initialDeadline);
 	const userList = useSelector(selectUserList);
-	const dispatch = useDispatch();
-	console.log(userList, dispatch);
 
 	const submitHandler = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		console.log(e.target);
 		console.log(formValue);
+		// Postしてreturnを追加する
 		// dispatch(add({taskList: [formValue]}));
 	};
-	const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		const key = e.target.name;
 		const value = e.target.value;
 		let newFormValue: FormValue;
@@ -62,7 +61,7 @@ const MakeContainer: FC = () => {
 		}
 	}
 
-	return <MakeComponent submitHandler={submitHandler} changeHandler={changeHandler} />
+	return <MakeComponent submitHandler={submitHandler} changeHandler={changeHandler} userList={userList} />
 }
 
 export default MakeContainer;
