@@ -46,6 +46,7 @@ const MakeContainer: FC = () => {
 		// dispatch(add({taskList: [formValue]}));
 	};
 	const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+		const dataType = e.target.getAttribute('data-type');
 		const key = e.target.name;
 		const value = e.target.value;
 		let newFormValue: FormValue;
@@ -63,7 +64,7 @@ const MakeContainer: FC = () => {
 			newFormValue = {...formValue,...{task_deadline: new Date(newDeadlineString)}};
 			setFormValue(newFormValue);
 		}else {
-			newFormValue = {...formValue,...{[key]: value}};
+			newFormValue = (dataType && dataType === 'number') ? {...formValue,...{[key]: Number(value)}} : {...formValue,...{[key]: value}};
 			setFormValue(newFormValue);
 		}
 	}

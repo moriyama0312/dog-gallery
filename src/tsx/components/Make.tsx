@@ -28,10 +28,10 @@ const MakeComponent: FC<MakeProps> = ({ submitHandler, changeHandler, userList }
 					<div className={Style.form__block}>
 						<h3 className={Style.form__block__title}>タスクのカテゴリー</h3>
 						<ul className={Style.checkbox__list}>
-							<li><input id="checkbox__cat__item01" type="radio" value="1" name="task_category" onChange={changeHandler}></input><label htmlFor="checkbox__cat__item01">趣味</label></li>
-							<li><input id="checkbox__cat__item02" type="radio" value="2" name="task_category" onChange={changeHandler}></input><label htmlFor="checkbox__cat__item02">仕事</label></li>
-							<li><input id="checkbox__cat__item02" type="radio" value="3" name="task_category" onChange={changeHandler}></input><label htmlFor="checkbox__cat__item03">勉強</label></li>
-							<li><input id="checkbox__cat__item02" type="radio" value="4" name="task_category" onChange={changeHandler}></input><label htmlFor="checkbox__cat__item04">交際</label></li>
+							<li><input id="checkbox__cat__item01" type="radio" data-type="number" value="1" name="task_category" onChange={changeHandler}></input><label htmlFor="checkbox__cat__item01">趣味</label></li>
+							<li><input id="checkbox__cat__item02" type="radio" data-type="number" value="2" name="task_category" onChange={changeHandler}></input><label htmlFor="checkbox__cat__item02">仕事</label></li>
+							<li><input id="checkbox__cat__item02" type="radio" data-type="number" value="3" name="task_category" onChange={changeHandler}></input><label htmlFor="checkbox__cat__item03">勉強</label></li>
+							<li><input id="checkbox__cat__item02" type="radio" data-type="number" value="4" name="task_category" onChange={changeHandler}></input><label htmlFor="checkbox__cat__item04">交際</label></li>
 						</ul>
 					</div>
 					<div className={Style.form__block}>
