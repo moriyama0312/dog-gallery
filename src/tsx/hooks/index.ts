@@ -54,6 +54,33 @@ export const useWrapperFetch = <T>(apiList: FetchApi[]) => {
 	return getData;
 }
 
+interface Post<T> {
+	api: string;
+	data: T;
+}
+export const useWrapperPost = <T>(post: Post<T>) => {
+	const dispatch = useDispatch();
+
+	const postData = useCallback(async () => {
+		dispatch(setFetchState({status: 'start'}));
+
+		try {
+			await Axios.post<T[]>(
+				post.api,
+				post.data
+			).then((res) => {
+				console.log(res.data);
+			}).catch(() => {
+				throw new Error('Post Data Error!');
+			});
+		}catch(error) {
+			dispatch(setFetchState({status: 'err', err: error}));
+		}
+	}, []);
+
+	return postData;
+}
+
 export const useGetTask = (): useGetTask => {
 	const [TaskList, setTaskList] = useState<Task[]>([]);
 	const [loading, setLoading] = useState(false);
