@@ -1,6 +1,7 @@
 import React, { FC, FormEvent, ChangeEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserList } from '../reducers/taskListSlice';
+import { useWrapperPost } from '../hooks/index';
 import MakeComponent from '../components/Make';
 
 const MakeContainer: FC = () => {
@@ -30,8 +31,14 @@ const MakeContainer: FC = () => {
 	const [formValue, setFormValue] = useState(initialFormValue);
 	const [deadline, setDeadline] = useState(initialDeadline);
 	const userList = useSelector(selectUserList);
+	const postData = useWrapperPost<FormValue>();
 
 	const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+		const postContents = {
+			api: '/api/tasks',
+			data: formValue
+		};
+		postData(postContents);
 		e.preventDefault();
 		console.log(e.target);
 		console.log(formValue);

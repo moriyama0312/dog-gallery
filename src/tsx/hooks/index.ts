@@ -37,7 +37,7 @@ export const useWrapperFetch = <T>(apiList: FetchApi[]) => {
 			await Axios.all(
 				apiList.map((api) => Axios.get<T[]>(api.api))
 			).then(Axios.spread((...res) => {
-				tmpDataList = res.map((item) => item.data);
+				tmpDataList = [...fetchData, ...res.map((item) => item.data)];
 				setFetchData(tmpDataList);
 				dispatch(setFetchState({status: 'success'}));
 			})).catch(() => {
@@ -58,10 +58,10 @@ interface Post<T> {
 	api: string;
 	data: T;
 }
-export const useWrapperPost = <T>(post: Post<T>) => {
+export const useWrapperPost = <T>() => {
 	const dispatch = useDispatch();
 
-	const postData = useCallback(async () => {
+	const postData = useCallback(async (post: Post<T>) => {
 		dispatch(setFetchState({status: 'start'}));
 
 		try {
