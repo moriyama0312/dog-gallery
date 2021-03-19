@@ -55,15 +55,7 @@ app.post('/api/:type', async (req, res) => {
 
 	try {
 		if(type === 'tasks') {
-			const bodyObj = {
-				title: 'Postテスト用',
-				detail: 'テスト用の内容です',
-				status: 1,
-				category: 3,
-				createdby: 'mory',
-				charged: 'mory',
-				deadline: new Date('2021-03-31 10:00:00')
-			};
+			await postgres.postTasks('POST_TASKS', req.body);
 		}
 	}catch(err) {
 		res.send(err);

@@ -35,7 +35,7 @@ const queryCreator = (type: string, payload: Payload) => {
 			break;
 		case 'POST_TASKS':
 			if(payload) {
-				if(payload.deadline) {
+				if(payload.task_deadline) {
 					// deadlineのDate型を変換するか考える
 					// date型はDBがTIME_STAMPで2019-03-01 10:00:00のように保管されている
 					// サーバーでDate型への変換は簡単なのでこの形に変換すると良さそう

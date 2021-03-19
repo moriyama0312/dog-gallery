@@ -14,13 +14,13 @@ export interface GetIcons {
 }
 // Post
 export interface PostTasks {
-	title: string,
-	detail: string,
-	status: number,
-	category: number,
-	createdby: string,
-	charged: string,
-	deadline?: string
+	task_title: string,
+	task_detail: string,
+	task_status: number,
+	task_category: number,
+	task_createdby: string,
+	task_charged: string,
+	task_deadline?: string
 }
 // interface PostProfiles {
 // 	id: string,

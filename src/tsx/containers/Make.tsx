@@ -11,14 +11,16 @@ const MakeContainer: FC = () => {
 		task_category: number;
 		task_createdby: string;
 		task_status: number;
+		task_charged: string;
 		task_deadline?: Date;
 	}
 	const initialFormValue: FormValue = {
 		task_title: '',
 		task_detail: '',
+		task_status: 1,
 		task_category: 0,
-		task_createdby: '',
-		task_status: 1
+		task_charged: '',
+		task_createdby: 'mory',
 	}
 	interface Deadline {
 		[key: string]: string;

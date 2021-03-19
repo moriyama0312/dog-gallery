@@ -30,6 +30,7 @@ export class Postgres {
 		};
 		try {
 			result = await this.client.query(query, params);
+			console.log(result);
 			return result.rows;
 		}catch(err) {
 			console.log(err);
@@ -59,12 +60,14 @@ export class Postgres {
 
 	// いったんエラー回避のため隠す
 	async postTasks(type: string, payload: interfaces.PostTasks) {
-		if(payload.deadline) {
-			payload.deadline = dayjs(payload.deadline).format('YYYY-MM-DD HH:mm:ss');
-			console.log(payload.deadline);
+		if(payload.task_deadline) {
+			payload.task_deadline = dayjs(payload.task_deadline).format('YYYY-MM-DD HH:mm:ss');
+			console.log(payload.task_deadline);
 		}
 		const query = queryCreator(type, payload);
 		const params = (Object.keys(payload) as (keyof interfaces.PostTasks)[]).map((item: keyof interfaces.PostTasks) => payload[item]);
+		console.log(query);
+		console.log(params);
 		return await this.query<interfaces.PostTasks>(query, params);
 	}
 	// async postProfiles(type: string, payload: interfaces.PostTasks) {
