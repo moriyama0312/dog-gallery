@@ -29,6 +29,9 @@
 				border: 2px solid #5151ec;
 				border-radius: 4px;
 				color: #000000;
+				+ a {
+					margin-top: 10px;
+				}
 			}
 		}
 		&:not(:first-child) {

@@ -35,7 +35,7 @@ export const taskListSlice = createSlice({
 	initialState,
 	reducers: {
 		add: (state, action: PayloadAction<PayloadActionAdd>) => {
-			state.taskList = [...state.taskList, ...action.payload.taskList];
+			state.taskList = [...action.payload.taskList];
 		},
 		addUser: (state, action: PayloadAction<PayloadActionAddUsers>) => {
 			state.userList = [...state.userList, ...action.payload.userList];

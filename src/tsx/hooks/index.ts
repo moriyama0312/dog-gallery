@@ -69,13 +69,16 @@ export const useWrapperPost = <T>() => {
 				post.api,
 				post.data
 			).then((res) => {
-				console.log(res.data);
+				console.log(res);
+				dispatch(setFetchState({status: 'success'}));
 			}).catch(() => {
 				throw new Error('Post Data Error!');
 			});
 		}catch(error) {
 			dispatch(setFetchState({status: 'err', err: error}));
 		}
+
+		return false;
 	}, []);
 
 	return postData;

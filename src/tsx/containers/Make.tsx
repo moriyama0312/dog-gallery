@@ -1,8 +1,10 @@
 import React, { FC, FormEvent, ChangeEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUserList } from '../reducers/taskListSlice';
-import { useWrapperPost } from '../hooks/index';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { selectUserList, add } from '../reducers/taskListSlice';
+import { useWrapperPost, useWrapperFetch } from '../hooks/index';
 import MakeComponent from '../components/Make';
+import { Task } from '../interfaces';
 
 const MakeContainer: FC = () => {
 	interface FormValue {
@@ -34,16 +36,25 @@ const MakeContainer: FC = () => {
 	const [deadline, setDeadline] = useState(initialDeadline);
 	const userList = useSelector(selectUserList);
 	const postData = useWrapperPost<FormValue>();
+	const getData = useWrapperFetch<Task>([{api: '/api/tasks'}]);
+	const dispatch = useDispatch();
+	const history = useHistory();
 
-	const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		const postContents = {
 			api: '/api/tasks',
 			data: formValue
 		};
-		postData(postContents);
+
 		e.preventDefault();
-		console.log(e.target);
-		console.log(formValue);
+
+		await postData(postContents);
+		const data = await getData();
+		console.log(data);
+		dispatch(add({taskList: data[0] as Task[]}));
+
+		history.push('/');
+
 		// Postしてreturnを追加する
 		// dispatch(add({taskList: [formValue]}));
 	};

@@ -55,7 +55,8 @@ app.post('/api/:type', async (req, res) => {
 
 	try {
 		if(type === 'tasks') {
-			await postgres.postTasks('POST_TASKS', req.body);
+			const result = await postgres.postTasks('POST_TASKS', req.body);
+			res.send(result);
 		}
 	}catch(err) {
 		res.send(err);

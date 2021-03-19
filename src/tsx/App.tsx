@@ -19,6 +19,7 @@ const App: FC = () => {
 		{ api: '/api/tasks' },
 		{ api: '/api/profiles' }
 	];
+	console.log('aaa');
 	const getData = useWrapperFetch<dataType>(apiList);
 	useEffect(() => {
 		const initStoreData = async () => {
