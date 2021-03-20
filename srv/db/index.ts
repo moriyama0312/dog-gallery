@@ -90,6 +90,12 @@ export class Postgres {
 	// 	const params = Object.keys(payload).map(item => item);
 	// 	return await this.query(query, params);
 	// }
+	async deleteTasks(type: string, payload: interfaces.DeleteTasks) {
+		const query = queryCreator(type, payload);
+		const params = (Object.keys(payload) as (keyof interfaces.DeleteTasks)[]).map((item: keyof interfaces.DeleteTasks) => payload[item]);
+
+		return await this.query<interfaces.DeleteTasks>(query, params);
+	}
 	get connectedStatus() {
 		return this.isConnected;
 	}

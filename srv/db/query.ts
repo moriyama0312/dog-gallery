@@ -69,7 +69,7 @@ const queryCreator = (type: string, payload: Payload) => {
 			}
 			break;
 		case 'DELETE_TASKS':
-			query = 'DELETE FROM tasks_tbl WHERE id = $1';
+			query = 'DELETE FROM tasks_tbl WHERE task_id = $1';
 			break;
 		default:
 			query = '';

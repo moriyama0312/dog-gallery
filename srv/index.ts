@@ -63,5 +63,23 @@ app.post('/api/:type', async (req, res) => {
 	}
 });
 
+app.delete('/api/:type/:id', async (req, res) => {
+	const type = req.params.type;
+	const id = req.params.id;
+	console.log(req.params);
+	if(!postgres.connectedStatus) {
+		await postgres.init();
+	}
+
+	try {
+		if(type === 'tasks') {
+			const result = await postgres.deleteTasks('DELETE_TASKS', {task_id: Number(id)});
+			res.send(result);
+		}
+	}catch(err) {
+		res.send(err);
+	}
+});
+
 const port = 3001;
 app.listen(port);

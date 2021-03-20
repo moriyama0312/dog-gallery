@@ -9,15 +9,15 @@ const TopContainer: FC = () => {
 	const dispatch = useDispatch();
 	const TaskList = useSelector(selectTaskList);
 	const { loading, err } = useSelector(selectFetchState);
-	const deletePost = useWrapperDelete();
+	const deletePostFetch = useWrapperDelete();
 
 	const fetchStatus = { loading, err };
 
 	const deleteBtnClickHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number) => {
 		console.log(id);
 		e.preventDefault();
-		await deletePost(id);
-		dispatch(deletePost(id));
+		await deletePostFetch(id);
+		dispatch(deletePost({ id }));
 	};
 
 	return <TopComponent fetchStatus={fetchStatus} TaskList={TaskList} deleteBtnClickHandler={deleteBtnClickHandler} />;

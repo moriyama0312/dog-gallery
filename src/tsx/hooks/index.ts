@@ -92,10 +92,7 @@ export const useWrapperDelete = () => {
 
 		try {
 			await Axios.delete(
-				'/api/tasks',
-				{
-					params: { id }
-				}
+				`/api/tasks/${id}`,
 			).then(() => {
 				dispatch(setFetchState({status: 'success'}));
 			}).catch(() => {

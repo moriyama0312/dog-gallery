@@ -46,7 +46,7 @@ export interface PutProfiles {
 }
 // Delete
 export interface DeleteTasks {
-	id: number
+	task_id: number
 }
 
 // DBへの接続
