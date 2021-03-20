@@ -84,6 +84,33 @@ export const useWrapperPost = <T>() => {
 	return postData;
 }
 
+export const useWrapperDelete = () => {
+	const dispatch = useDispatch();
+
+	const deletePost = useCallback(async (id: number) => {
+		dispatch(setFetchState({status: 'start'}));
+
+		try {
+			await Axios.delete(
+				'/api/tasks',
+				{
+					params: { id }
+				}
+			).then(() => {
+				dispatch(setFetchState({status: 'success'}));
+			}).catch(() => {
+				throw new Error('Delete Error!');
+			});
+		}catch(error) {
+			dispatch(setFetchState({status: 'err', err: error}));
+		}
+
+		return false;
+	}, []);
+
+	return deletePost;
+}
+
 export const useGetTask = (): useGetTask => {
 	const [TaskList, setTaskList] = useState<Task[]>([]);
 	const [loading, setLoading] = useState(false);

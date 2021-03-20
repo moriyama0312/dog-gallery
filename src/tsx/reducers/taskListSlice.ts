@@ -16,6 +16,9 @@ export interface PayloadActionAdd {
 export interface PayloadActionAddUsers {
 	userList: User[];
 }
+interface PayloadActionDeletePost {
+	id: number;
+}
 interface PayloadActionFetchState {
 	status: 'start' | 'success' | 'err',
 	err?: string
@@ -39,6 +42,9 @@ export const taskListSlice = createSlice({
 		},
 		addUser: (state, action: PayloadAction<PayloadActionAddUsers>) => {
 			state.userList = [...state.userList, ...action.payload.userList];
+		},
+		deletePost: (state, action: PayloadAction<PayloadActionDeletePost>) => {
+			state.taskList = state.taskList.filter((task) => task.task_id !== action.payload.id);
 		},
 		setFetchState: (state, action: PayloadAction<PayloadActionFetchState>) => {
 			if(action.payload.status === 'start') {
@@ -69,5 +75,5 @@ export const taskListSlice = createSlice({
 export const selectTaskList = (state: RootState): Task[] => state.taskList.taskList;
 export const selectUserList = (state: RootState): User[] => state.taskList.userList;
 export const selectFetchState = (state: RootState): {loading: boolean, err: string} => state.taskList.fetchState;
-export const { add, addUser, setFetchState } = taskListSlice.actions;
+export const { add, addUser, deletePost, setFetchState } = taskListSlice.actions;
 export default taskListSlice.reducer;

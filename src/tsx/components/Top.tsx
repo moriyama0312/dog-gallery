@@ -12,10 +12,11 @@ interface TopProps {
 		loading: boolean;
 		err: string;
 	};
+	deleteBtnClickHandler: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number) => void;
 }
 
 
-const TopComponent: FC<TopProps> = ({TaskList, fetchStatus}) => {
+const TopComponent: FC<TopProps> = ({TaskList, fetchStatus, deleteBtnClickHandler}) => {
 	const StatusList: Status[] = [
 		{
 			index: 1,
@@ -51,14 +52,14 @@ const TopComponent: FC<TopProps> = ({TaskList, fetchStatus}) => {
 							<Link key={item.task_id} to={`/tasks/${item.task_id}`} className={Style.task}>
 								<h4 className={Style.task__title}>{item.task_title}</h4>
 								<div className={Styles.task__btns}>
-									<Link
+									<button
 										className={Styles.task__btns__edit}
-										to={`/edit/${item.task_id}`}
 									>
 										Edit
-									</Link>
+									</button>
 									<button
 										className={Styles.task__btns__delete}
+										onClick={(e) => deleteBtnClickHandler(e, item.task_id)}
 									>
 										Delete
 									</button>
