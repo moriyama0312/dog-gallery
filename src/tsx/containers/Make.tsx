@@ -1,7 +1,7 @@
-import React, { FC, FormEvent, ChangeEvent, useState } from 'react';
+import React, { FC, FormEvent, ChangeEvent, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { selectUserList, add } from '../reducers/taskListSlice';
+import { useHistory, useLocation } from 'react-router-dom';
+import { selectTaskList, selectUserList, add } from '../reducers/taskListSlice';
 import { useWrapperPost, useWrapperFetch } from '../hooks/index';
 import MakeComponent from '../components/Make';
 import { Task } from '../interfaces';
@@ -21,8 +21,8 @@ const MakeContainer: FC = () => {
 		task_detail: '',
 		task_status: 1,
 		task_category: 0,
-		task_charged: '',
 		task_createdby: 'mory',
+		task_charged: ''
 	}
 	interface Deadline {
 		[key: string]: string;
@@ -35,10 +35,12 @@ const MakeContainer: FC = () => {
 	const [formValue, setFormValue] = useState(initialFormValue);
 	const [deadline, setDeadline] = useState(initialDeadline);
 	const userList = useSelector(selectUserList);
+	const taskList = useSelector(selectTaskList);
 	const postData = useWrapperPost<FormValue>();
 	const getData = useWrapperFetch<Task>([{api: '/api/tasks'}]);
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const query = new URLSearchParams(useLocation().search);
 
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		const postContents = {
@@ -50,13 +52,9 @@ const MakeContainer: FC = () => {
 
 		await postData(postContents);
 		const data = await getData();
-		console.log(data);
 		dispatch(add({taskList: data[0] as Task[]}));
 
 		history.push('/');
-
-		// Postしてreturnを追加する
-		// dispatch(add({taskList: [formValue]}));
 	};
 	const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		const dataType = e.target.getAttribute('data-type');
@@ -82,7 +80,13 @@ const MakeContainer: FC = () => {
 		}
 	}
 
-	return <MakeComponent submitHandler={submitHandler} changeHandler={changeHandler} userList={userList} />
+	useEffect(() => {
+		if(query.get('edit')) {
+			setFormValue(taskList.filter((task) => task.task_id === Number(query.get('edit')))[0]);
+		}
+	}, [taskList]);
+
+	return <MakeComponent submitHandler={submitHandler} changeHandler={changeHandler} userList={userList} formValue={formValue} />
 }
 
 export default MakeContainer;

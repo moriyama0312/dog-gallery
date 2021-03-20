@@ -81,5 +81,5 @@ app.delete('/api/:type/:id', async (req, res) => {
 	}
 });
 
-const port = 3001;
+const port = 3002;
 app.listen(port);
