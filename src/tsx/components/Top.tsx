@@ -50,6 +50,19 @@ const TopComponent: FC<TopProps> = ({TaskList, fetchStatus}) => {
 						{TaskList.filter((task) => task.task_status === status.index).map((item) => (
 							<Link key={item.task_id} to={`/tasks/${item.task_id}`} className={Style.task}>
 								<h4 className={Style.task__title}>{item.task_title}</h4>
+								<div className={Styles.task__btns}>
+									<Link
+										className={Styles.task__btns__edit}
+										to={`/edit/${item.task_id}`}
+									>
+										Edit
+									</Link>
+									<button
+										className={Styles.task__btns__delete}
+									>
+										Delete
+									</button>
+								</div>
 							</Link>
 						))}
 					</div>
